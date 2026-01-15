@@ -1,13 +1,13 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import { QUERIES } from "../../constants";
-
-import { COLORS, WEIGHTS } from "../../constants";
-import Logo from "../Logo";
-import SuperHeader from "../SuperHeader";
-import MobileMenu from "../MobileMenu";
-import Icon from "../Icon";
+import { COLORS, QUERIES, WEIGHTS } from '../../constants';
+import Logo from '../Logo';
+import Icon from '../Icon';
+import UnstyledButton from '../UnstyledButton';
+import SuperHeader from '../SuperHeader';
+import MobileMenu from '../MobileMenu';
+import VisuallyHidden from '../VisuallyHidden';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -20,37 +20,36 @@ const Header = () => {
   return (
     <header>
       <SuperHeader />
-      <GreyBar />
       <MainHeader>
-        <Side>
+        <LogoWrapper>
           <Logo />
-        </Side>
-        <Nav>
+        </LogoWrapper>
+
+        <DesktopNav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
           <NavLink href="/collections">Collections</NavLink>
-        </Nav>
-        <Side />
-        <SmallNav>
-          <Icon
-            id="shopping-bag"
-            color={`${COLORS.gray[900]}`}
-            size={24}
-          />
-          <Icon
-            id="search"
-            color={`${COLORS.gray[900]}`}
-            size={24}
-          />
-          <Icon
-            id="menu"
-            color={`${COLORS.gray[900]}`}
-            size={24}
-          />
-        </SmallNav>
+        </DesktopNav>
+
+        <MobileActions>
+          <ShoppingBagButton>
+            <Icon id="shopping-bag" />
+            <VisuallyHidden>Open cart</VisuallyHidden>
+          </ShoppingBagButton>
+          <UnstyledButton>
+            <Icon id="search" />
+            <VisuallyHidden>Search</VisuallyHidden>
+          </UnstyledButton>
+          <UnstyledButton>
+            <Icon id="menu" />
+            <VisuallyHidden>Open menu</VisuallyHidden>
+          </UnstyledButton>
+        </MobileActions>
+
+        <Filler />
       </MainHeader>
 
       <MobileMenu
@@ -61,38 +60,26 @@ const Header = () => {
   );
 };
 
-const GreyBar = styled.div`
-  height: 4px;
-  background-color: ${COLORS.gray[900]};
-  display: none;
-
-  @media ${QUERIES.tabletAndSmaller} {
-    display: revert;
-  }
-`;
-
-const SmallNav = styled.div`
-  display: none;
-
-  @media ${QUERIES.tabletAndSmaller} {
-    display: flex;
-    gap: clamp(16px, 3.5vw, 32px);
-  }
-`;
-
 const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
-  padding: 18px clamp(16px, 3.5vw, 32px);
+  padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
 
   @media ${QUERIES.tabletAndSmaller} {
+    justify-content: space-between;
     align-items: center;
+    border-top: 4px solid ${COLORS.gray[900]};
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    padding-left: 16px;
+    padding-right: 16px;
   }
 `;
 
-const Nav = styled.nav`
+const DesktopNav = styled.nav`
   display: flex;
   gap: 48px;
   margin: 0px 48px;
@@ -102,8 +89,36 @@ const Nav = styled.nav`
   }
 `;
 
-const Side = styled.div`
+const MobileActions = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    gap: 32px;
+    display: flex;
+  }
+
+  @media ${QUERIES.phoneAndSmaller} {
+    gap: 16px;
+  }
+`;
+
+const LogoWrapper = styled.div`
   flex: 1;
+  @media ${QUERIES.tabletAndSmaller} {
+    flex: revert;
+  }
+`;
+
+const ShoppingBagButton = styled(UnstyledButton)`
+  transform: translateX(-2px);
+`;
+
+const Filler = styled.div`
+  flex: 1;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
