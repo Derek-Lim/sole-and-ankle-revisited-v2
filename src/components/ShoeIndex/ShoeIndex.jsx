@@ -9,24 +9,28 @@ import Spacer from '../Spacer';
 import ShoeSidebar from '../ShoeSidebar';
 import ShoeGrid from '../ShoeGrid';
 
+const ShoeBreadcrumbs = () => {
+  return (
+    <Breadcrumbs>
+      <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
+      <Breadcrumbs.Crumb href="/sale/shoes">Shoes</Breadcrumbs.Crumb>
+    </Breadcrumbs>
+  );
+};
+
 const ShoeIndex = ({ sortId, setSortId }) => {
   return (
     <Wrapper>
       <MainColumn>
         <Header>
-          <PageHeader>
-            <BreadcrumbsWrapper>
-              <Breadcrumbs>
-                <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-                <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-                <Breadcrumbs.Crumb href="/sale/shoes">
-                  Shoes
-                </Breadcrumbs.Crumb>
-              </Breadcrumbs>
-            </BreadcrumbsWrapper>
+          <div>
+            <MobileBreadcrumbs>
+              <ShoeBreadcrumbs />
+            </MobileBreadcrumbs>
             <Title>Running</Title>
-          </PageHeader>
-          <SelectWrapper>
+          </div>
+          <SortFilterWrapper>
             <Select
               label="Sort"
               value={sortId}
@@ -35,19 +39,15 @@ const ShoeIndex = ({ sortId, setSortId }) => {
               <option value="newest">Newest Releases</option>
               <option value="price">Price</option>
             </Select>
-          </SelectWrapper>
+          </SortFilterWrapper>
         </Header>
         <Spacer size={32} />
         <ShoeGrid />
       </MainColumn>
       <LeftColumn>
-        <Breadcrumbs>
-          <Breadcrumbs.Crumb href="/">Home</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale">Sale</Breadcrumbs.Crumb>
-          <Breadcrumbs.Crumb href="/sale/shoes">
-            Shoes
-          </Breadcrumbs.Crumb>
-        </Breadcrumbs>
+        <DesktopBreadcrumbs>
+          <ShoeBreadcrumbs />
+        </DesktopBreadcrumbs>
         <Spacer size={42} />
         <ShoeSidebar />
       </LeftColumn>
@@ -72,10 +72,6 @@ const LeftColumn = styled.div`
 
 const MainColumn = styled.div`
   flex: 1;
-
-  @media ${QUERIES.tabletAndSmaller} {
-    align-items: center;
-  }
 `;
 
 const Header = styled.header`
@@ -84,17 +80,7 @@ const Header = styled.header`
   align-items: baseline;
 
   @media ${QUERIES.tabletAndSmaller} {
-    align-items: center;
-  }
-`;
-
-const PageHeader = styled.div``;
-
-const BreadcrumbsWrapper = styled.div`
-  display: none;
-
-  @media ${QUERIES.tabletAndSmaller} {
-    display: revert;
+    align-items: flex-end;
   }
 `;
 
@@ -103,8 +89,21 @@ const Title = styled.h2`
   font-weight: ${WEIGHTS.medium};
 `;
 
-const SelectWrapper = styled.div`
-  
+const DesktopBreadcrumbs = styled.div`
+  @media ${QUERIES.tabletAndSmaller} {
+    display: none;
+  }
+`;
+
+const MobileBreadcrumbs = styled.div`
+  display: none;
+
+  @media ${QUERIES.tabletAndSmaller} {
+    display: revert;
+  }
+`;
+
+const SortFilterWrapper = styled.div`
   @media ${QUERIES.phoneAndSmaller} {
     display: none;
   }
