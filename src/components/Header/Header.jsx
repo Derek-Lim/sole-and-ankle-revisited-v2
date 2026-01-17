@@ -21,12 +21,12 @@ const Header = () => {
         </LogoWrapper>
 
         <DesktopNav>
-          <NavLink href="/sale">Sale</NavLink>
+          <NavLink href="/sale">SaleSale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/men">MenMen</NavLink>
+          <NavLink href="/women">WomenWomen</NavLink>
+          <NavLink href="/kids">KidsKids</NavLink>
+          <NavLink href="/collections">CollectionsCollections</NavLink>
         </DesktopNav>
 
         <MobileActions>
@@ -61,6 +61,8 @@ const MainHeader = styled.div`
   padding: 18px 32px;
   height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
+  overflow-x: auto;
+  overflow-y: hidden;
 
   @media ${QUERIES.tabletAndSmaller} {
     justify-content: space-between;
@@ -76,7 +78,11 @@ const MainHeader = styled.div`
 
 const DesktopNav = styled.nav`
   display: flex;
-  gap: 48px;
+  gap: clamp(
+    1rem,
+    10vw - 5rem,
+    4rem
+  );
   margin: 0px 48px;
 
   @media ${QUERIES.tabletAndSmaller} {
