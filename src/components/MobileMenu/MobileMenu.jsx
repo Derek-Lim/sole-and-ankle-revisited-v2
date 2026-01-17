@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import * as Dialog from '@radix-ui/react-dialog';
 
-import { QUERIES, COLORS, WEIGHTS } from '../../constants';
-
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
@@ -47,6 +45,9 @@ const Overlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
   background: hsl(220deg 5% 40% / 0.8);
+  background: hsl(
+    var(--blue-hue) var(--low-saturation) var(--low-lightness) / 0.8
+  );
 `;
 
 const Content = styled(Dialog.Content)`
@@ -54,7 +55,7 @@ const Content = styled(Dialog.Content)`
   top: 0;
   right: 0;
   bottom: 0;
-  background: white;
+  background: var(--color-white);
   width: 300px;
   height: 100%;
   padding: 24px 32px;
@@ -76,14 +77,14 @@ const Nav = styled.nav`
 `;
 
 const NavLink = styled.a`
-  color: ${COLORS.gray[900]};
-  font-weight: ${WEIGHTS.medium};
+  color: var(--color-gray-900);
+  font-weight: var(--weight-medium);
   text-decoration: none;
   font-size: 1.125rem;
   text-transform: uppercase;
 
   &:first-of-type {
-    color: ${COLORS.secondary};
+    color: var(--color-secondary);
   }
 `;
 
@@ -99,8 +100,8 @@ const Footer = styled.footer`
 `;
 
 const FooterLink = styled.a`
-  color: ${COLORS.gray[700]};
-  font-weight: ${WEIGHTS.normal};
+  color: var(--color-gray-700);
+  font-weight: var(--weight-normal);
   text-decoration: none;
   font-size: 0.875rem;
 `;
