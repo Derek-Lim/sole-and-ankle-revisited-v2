@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import * as Dialog from "@radix-ui/react-dialog";
+import * as Dialog from '@radix-ui/react-dialog';
 
-import { COLORS } from '../../constants';
+import { QUERIES, COLORS, WEIGHTS } from '../../constants';
 
 import UnstyledButton from '../UnstyledButton';
 import Icon from '../Icon';
@@ -10,39 +10,33 @@ import VisuallyHidden from '../VisuallyHidden';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
   return (
-    <Dialog.Root
-      open={isOpen}
-      onOpenChange={(open) => {
-        if (!open) {
-          onDismiss();
-        }
-      }}
-    >
+    <Dialog.Root open={isOpen} onOpenChange={onDismiss}>
       <Dialog.Portal>
         <Overlay />
+
         <Content>
+          <CloseButton onClick={onDismiss}>
+            <Icon id="close" />
+            <VisuallyHidden>Dismiss menu</VisuallyHidden>
+          </CloseButton>
           <VisuallyHidden>
-            <Dialog.Title>Mobile Navigation</Dialog.Title>
-            <Dialog.Description>Main navigation links</Dialog.Description>
+            <Dialog.Title>Mobile navigation</Dialog.Title>
+            <Dialog.Description>Mobile navigation</Dialog.Description>
           </VisuallyHidden>
-          <CloseButtonWrapper>
-            <CloseButton>
-              <Icon id="close" />
-            </CloseButton>
-          </CloseButtonWrapper>
-          <MobileNav>
+          <Filler />
+          <Nav>
             <NavLink href="/sale">Sale</NavLink>
             <NavLink href="/new">New&nbsp;Releases</NavLink>
             <NavLink href="/men">Men</NavLink>
             <NavLink href="/women">Women</NavLink>
             <NavLink href="/kids">Kids</NavLink>
             <NavLink href="/collections">Collections</NavLink>
-          </MobileNav>
-          <MobileMenuFooter>
+          </Nav>
+          <Footer>
             <FooterLink href="/terms">Terms and Conditions</FooterLink>
             <FooterLink href="/privacy">Privacy Policy</FooterLink>
             <FooterLink href="/contact">Contact Us</FooterLink>
-          </MobileMenuFooter>
+          </Footer>
         </Content>
       </Dialog.Portal>
     </Dialog.Root>
@@ -52,69 +46,63 @@ const MobileMenu = ({ isOpen, onDismiss }) => {
 const Overlay = styled(Dialog.Overlay)`
   position: fixed;
   inset: 0;
-  background: #60646CCC;
+  background: hsl(220deg 5% 40% / 0.8);
 `;
 
 const Content = styled(Dialog.Content)`
   position: fixed;
   top: 0;
   right: 0;
-  height: 100%;
+  bottom: 0;
   background: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 32px;
   width: 300px;
+  height: 100%;
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
 `;
 
-const CloseButtonWrapper = styled.div`
-  position: relative;
-  flex: 1;
-`;
-
-const CloseButton = styled(Dialog.Close)`
-  border: none;
-  background-color: transparent;
+const CloseButton = styled(UnstyledButton)`
   position: absolute;
-  top: -12px;
-  right: -24px;
-  cursor: pointer;
+  top: 10px;
+  right: 0;
+  padding: 16px;
 `;
 
-const MobileNav = styled.nav`
+const Nav = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 16px;
 `;
 
-const MobileMenuFooter = styled.footer`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  flex: 1;
-  gap: 14px;
-`;
-
-const Link = styled.a`
-  text-decoration: none;
-`;
-
-const NavLink = styled(Link)`
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 18px;
+const NavLink = styled.a`
   color: ${COLORS.gray[900]};
+  font-weight: ${WEIGHTS.medium};
+  text-decoration: none;
+  font-size: 1.125rem;
+  text-transform: uppercase;
 
   &:first-of-type {
     color: ${COLORS.secondary};
   }
 `;
 
-const FooterLink = styled(Link)`
-  font-weight: 500;
-  font-size: 14px;
+const Filler = styled.div`
+  flex: 1;
+`;
+const Footer = styled.footer`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: flex-end;
+`;
+
+const FooterLink = styled.a`
   color: ${COLORS.gray[700]};
+  font-weight: ${WEIGHTS.normal};
+  text-decoration: none;
+  font-size: 0.875rem;
 `;
 
 export default MobileMenu;
