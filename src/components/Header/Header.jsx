@@ -21,12 +21,14 @@ const Header = () => {
         </LogoWrapper>
 
         <DesktopNav>
-          <NavLink href="/sale">SaleSale</NavLink>
+          <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">MenMen</NavLink>
-          <NavLink href="/women">WomenWomen</NavLink>
-          <NavLink href="/kids">KidsKids</NavLink>
-          <NavLink href="/collections">CollectionsCollections</NavLink>
+          <NavLink href="/men">Men</NavLink>
+          <NavLink href="/women">Women</NavLink>
+          <NavLink href="/kids">Kids</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
+          <NavLink href="/collections">Collections</NavLink>
         </DesktopNav>
 
         <MobileActions>
@@ -59,13 +61,10 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
-  overflow-x: auto;
-  overflow-y: hidden;
+  overflow: auto;
 
-  @media ${QUERIES.tabletAndSmaller} {
-    justify-content: space-between;
+  @media ${QUERIES.tabletAndSmaller} {    justify-content: space-between;
     align-items: center;
     border-top: 4px solid ${COLORS.gray[900]};
   }
@@ -78,11 +77,7 @@ const MainHeader = styled.div`
 
 const DesktopNav = styled.nav`
   display: flex;
-  gap: clamp(
-    1rem,
-    10vw - 5rem,
-    4rem
-  );
+  gap: clamp(1rem, 9.2vw - 4.5rem, 3.5rem);
   margin: 0px 48px;
 
   @media ${QUERIES.tabletAndSmaller} {
