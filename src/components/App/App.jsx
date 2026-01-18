@@ -5,14 +5,11 @@ import { QUERIES } from '../../constants';
 import Header from '../Header';
 import ShoeIndex from '../ShoeIndex';
 
-import { GlobalStyles } from '../../constants';
-
 const App = () => {
   const [sortId, setSortId] = React.useState('newest');
 
   return (
     <>
-      <GlobalStyles />
       <Header />
       <Main>
         <ShoeIndex sortId={sortId} setSortId={setSortId} />
